@@ -62,7 +62,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		g.setFont(titleFont);
 		g.setColor(Color.WHITE);
-		g.drawString("Champion Protectors", 150, 200);
+		g.drawString("Blasteroids", 250, 200);
 		titleFont = new Font("Arial", Font.PLAIN, 24);
 		g.setFont(titleFont);
 		g.setColor(Color.white);
