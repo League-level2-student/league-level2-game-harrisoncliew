@@ -9,7 +9,7 @@ public static void main(String[] args) {
 
 }
 JFrame frame;
-JPanel panel;
+BlasteroidsPanel panel;
 public static final int WIDTH = 800;
 public static final int HEIGHT  = 800;
 
@@ -25,6 +25,7 @@ void setup() {
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.setSize(WIDTH, HEIGHT);
 	frame.setVisible(true);
+	frame.addKeyListener(panel);
 	
 }
 }
