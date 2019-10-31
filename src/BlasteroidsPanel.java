@@ -26,12 +26,15 @@ public class BlasteroidsPanel extends JPanel implements ActionListener, KeyListe
 		    drawGameState(g);
 		}else if(currentState == END){
 		    drawEndState(g);
+		}else if(currentState == I) {
+			drawInstructState(g);
 		}
 		
 	}
 	final int GAME = 1;
 	final int MENU = 0;
 	final int END = 2;
+	final int I = 3;
 	int currentState = MENU;
 	Font f = new Font("Courier New", Font.PLAIN, 48);
 	Timer frameDraw;
@@ -77,9 +80,29 @@ public class BlasteroidsPanel extends JPanel implements ActionListener, KeyListe
 		f = new Font("Courier New", Font.PLAIN, 24);
 		g.setFont(f);
 		g.setColor(Color.YELLOW);
-		g.drawString("You scored points.", 250, 400);
+		g.drawString("You scored points", 250, 400);
 		g.drawString("Press ENTER to restart", 225, 600);
 		
+	}
+	
+	void drawInstructState(Graphics g) {
+		int n = 30;
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, BlasteroidsRunner.WIDTH, BlasteroidsRunner.HEIGHT);
+		f = new Font("Courier New", Font.PLAIN, 48);
+		g.setFont(f);
+		g.setColor(Color.WHITE);
+		g.drawString("Blasteroids Instructions",50, 200);
+		f = new Font("Courier New", Font.PLAIN, 24);
+		g.setFont(f);
+		g.setColor(Color.white);
+		g.drawString("Choose your character and shoot the asteroids by", n, 300);
+		g.drawString("pressing the space bar. Shooting an asteroid can get", n, 350);
+		g.drawString("you points. Move the rocket using the arrow keys.", n, 400);
+		g.drawString("The left and right keys rotate the character, and the", n, 450);
+		g.drawString("up key thrusts your character forward. Don't get", n, 500);
+		g.drawString("hit by asteroids and try to get the most points.", n, 550);
+		g.drawString("Press i to return to menu", 200, 650);
 	}
 
 	@Override
@@ -104,12 +127,19 @@ public class BlasteroidsPanel extends JPanel implements ActionListener, KeyListe
 		// TODO Auto-generated method stub
 		if(e.getKeyCode()==KeyEvent.VK_ENTER) {
 			System.out.println("currentState"+currentState);
-			 if (currentState == END) {
+			if (currentState == END) {
 			        currentState = MENU;
 			    } else {
 			        currentState++;
 			    }
 			
+		}
+		if(e.getKeyCode()==KeyEvent.VK_I) {
+			if(currentState == I) {
+				 currentState = MENU;
+			 }else {
+			currentState = I;
+			 }
 		}
 		if(e.getKeyCode()==KeyEvent.VK_UP) {
 			System.out.println("UP");
@@ -119,6 +149,9 @@ public class BlasteroidsPanel extends JPanel implements ActionListener, KeyListe
 		}
 		if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
 			System.out.println("RIGHT");
+		}
+		if(e.getKeyCode()==KeyEvent.VK_SPACE) {
+			System.out.println("SPACE");
 		}
 	}
 	@Override
