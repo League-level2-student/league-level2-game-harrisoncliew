@@ -14,7 +14,7 @@ public class BlasteroidsPanel extends JPanel implements ActionListener, KeyListe
 	//There should be a KeyListener to control arrow keys and space bar. Space bar shoots, and arrow keys move.//
 	//The numbers 1, 2, and 3 are used to choose the character. The letter "i" will be used to find the instructions, and "Enter" will be used to switch states.
 	public BlasteroidsPanel() {
-		Timer frameDraw = new Timer(1000/60, this);
+		frameDraw = new Timer(1000/60, this);
 		frameDraw.start();
 		
 	}
@@ -38,6 +38,14 @@ public class BlasteroidsPanel extends JPanel implements ActionListener, KeyListe
 	int currentState = MENU;
 	Font f = new Font("Courier New", Font.PLAIN, 48);
 	Timer frameDraw;
+	BlasteroidShip b = new BlasteroidShip(400,400,30,30);
+	BlasteroidsObjectManager ob = new BlasteroidsObjectManager(b);
+	Timer alienSpawn;
+	
+	void startGame() {
+		alienSpawn = new Timer(250,ob);
+		alienSpawn.start();
+	}
 	
 	void updateGameState() {
 		
@@ -51,8 +59,10 @@ public class BlasteroidsPanel extends JPanel implements ActionListener, KeyListe
 	}
 	
 	void drawGameState(Graphics g) {
-		g.setColor(Color.blue);
+		g.setColor(Color.black);
 		g.fillRect(0, 0, BlasteroidsRunner.WIDTH, BlasteroidsRunner.HEIGHT);
+		ob.draw(g);
+		
 		
 		
 	}
@@ -126,9 +136,12 @@ public class BlasteroidsPanel extends JPanel implements ActionListener, KeyListe
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getKeyCode()==KeyEvent.VK_ENTER) {
-			System.out.println("currentState"+currentState);
+			System.out.println(currentState);
 			if (currentState == END) {
 			        currentState = MENU;
+			    } else if(currentState == MENU) {
+			    	currentState = GAME;
+			    	startGame();
 			    } else {
 			        currentState++;
 			    }
